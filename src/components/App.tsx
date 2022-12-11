@@ -6,8 +6,7 @@ const App = () => {
   return (
     <div className={styles.wrapper}>
       <header>
-        <Link to={'/'}>Main</Link>
-        <Link to={'/todo'}>Todo List</Link>
+      <Link to={'/'}>Todo List</Link>
       </header>
       <Routes>
         <Route
