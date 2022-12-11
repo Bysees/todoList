@@ -1,4 +1,4 @@
-import { ISubTask } from '@/types/Task'
+import { ISubTask } from '@/types/Todo'
 import { ActionTypes } from '@/store/index'
 
 type SubTasksState = {

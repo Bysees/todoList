@@ -32,11 +32,32 @@
   animation: appear 0.3s;
 }
 
-.hideButton {
-  width: fit-content;
-  padding: 0.5em;
-  border-radius: 0.2em;
+.manageButtons {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 2em;
+
+  &__hide {
+    background-color: transparent;
+    font-weight: 700;
+    border-bottom: 2px solid transparent;
+    transition: 0.2s;
+    &:hover {
+      border-bottom: 2px solid black;
+    }
+  }
+  
+  &__remove {
+    background-color: transparent;
+    border-bottom: 2px solid transparent;
+    font-weight: 700;
+    color: red;
+    transition: 0.2s;
+    &:hover {
+      border-bottom: 2px solid red;
+    }
+  }
+
 }
 
 .title {
@@ -185,39 +206,5 @@
       color: black;
       background-color: rgb(236, 236, 236);
     }
-  }
-}
-
-.filesWrapper {}
-
-.files {
-  padding: 15px;
-  margin-top: 15px;
-  height: 70px;
-  border: 1px solid #000;
-  border-radius: 1em;
-  opacity: 0.3;
-  margin-bottom: 10px;
-  text-align: center;
-  cursor: pointer;
-
-  & svg {
-    height: 100%;
-  }
-
-  &_dragActive {
-    background-color: rgb(159, 234, 255);
-  }
-
-}
-
-.files__block {
-  display: flex;
-  gap: 1em;
-
-  & > img {
-    height: 75px;
-    object-fit: contain;
-    object-position: center;
   }
 }

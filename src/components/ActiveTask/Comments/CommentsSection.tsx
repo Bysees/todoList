@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { IComment } from '@/types/Task'
+import { IComment } from '@/types/Todo'
 import { getTaskField } from '@/store/selectors/todo'
 import { useTypedSelector } from '@/store/hooks'
 import Comments from './Comments'

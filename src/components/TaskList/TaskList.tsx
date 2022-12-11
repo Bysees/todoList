@@ -1,28 +1,27 @@
 import { Droppable } from 'react-beautiful-dnd'
 import { FC, ReactNode } from 'react'
 import cn from 'classnames'
-import { ITask, TStatusIds } from '@/types/Task'
+import { ITask, TStatusIds } from '@/types/Todo'
 import { useTypedSelector } from '@/store/hooks'
 import { store } from '@/store'
 import styles from './tasks.module.scss'
 
 interface Props {
-  statusColumnId: TStatusIds
+  statusId: TStatusIds
   children: (taskId: ITask['id'], index: number) => ReactNode
 }
 
-const TaskList: FC<Props> = ({ children, statusColumnId }) => {
-  const taskIds = useTypedSelector((state) => state.todo.statusColums.entities[statusColumnId].taskIds)
+const TaskList: FC<Props> = ({ children, statusId }) => {
+  const taskIds = useTypedSelector((state) => state.todo.status.entities[statusId].taskIds)
   const filterText = useTypedSelector((state) => state.todo.filter.text)
   const tasks = store.getState().todo.tasks.entities // Суть: Работать с актуальным значением без лишних ререндеров.
 
   const filtredTaskIds = taskIds.reduce((result, taskId) => {
     const task = tasks[taskId]
-    const taskNumber = String(task.number)
     const title = task.title.toLocaleLowerCase()
     const filter = filterText.toLocaleLowerCase()
     
-    if(taskNumber === filter || title.includes(filter)) {
+    if(title.includes(filter)) {
       return [...result, taskId]
     }
     
@@ -31,7 +30,7 @@ const TaskList: FC<Props> = ({ children, statusColumnId }) => {
   
 
   return (
-    <Droppable droppableId={statusColumnId} >
+    <Droppable droppableId={statusId} >
       {(provided, snapshot) => (
         <ul
           className={cn(styles.taskList, {[styles.taskList_isDragOver]: snapshot.isDraggingOver})}

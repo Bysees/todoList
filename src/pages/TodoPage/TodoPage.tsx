@@ -1,5 +1,5 @@
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
-import { TStatusIds } from '@/types/Task'
+import { TStatusIds } from '@/types/Todo'
 import { useTypedDispatch, useTypedSelector } from '@/store/hooks'
 import { editTaskPosition } from '@/store/actions/todo'
 import { Storage } from '@/services/Storage'
@@ -10,9 +10,7 @@ import styles from './todoPage.module.scss'
 
 const TodoPage = () => {
   const dispatch = useTypedDispatch()
-  const statusColumsIds = useTypedSelector((state) => state.todo.statusColums.ids)
-
-  
+  const statusIds = useTypedSelector((state) => state.todo.status.ids)
 
   const dragEndHandler = ({ draggableId, source, destination }: DropResult) => {
     if (!destination) {
@@ -25,8 +23,8 @@ const TodoPage = () => {
 
     dispatch(
       editTaskPosition({
-        startColumnId: source.droppableId as TStatusIds,
-        endColumnId: destination.droppableId as TStatusIds,
+        startStatusId: source.droppableId as TStatusIds,
+        endStatusId: destination.droppableId as TStatusIds,
         endIndex: destination.index,
         taskId: draggableId
       })
@@ -39,10 +37,10 @@ const TodoPage = () => {
       <FilterSection />
       <div className={styles.todoWrapper}>
       <DragDropContext  onDragEnd={dragEndHandler}>
-        {statusColumsIds.map((statusColumnId) => (
+        {statusIds.map((statusId) => (
           <TasksSection
-            key={statusColumnId}
-            statusColumnId={statusColumnId}
+            key={statusId}
+            statusId={statusId}
           />
         ))}
       </DragDropContext>

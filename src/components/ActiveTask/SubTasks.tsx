@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FC, memo } from 'react'
 import { HandySvg } from 'handy-svg'
-import { ISubTask, ITask } from '@/types/Task'
+import { ISubTask, ITask } from '@/types/Todo'
 import { getTaskField } from '@/store/selectors/todo'
 import { useTypedSelector } from '@/store/hooks'
 import styles from './activeTask.module.scss'

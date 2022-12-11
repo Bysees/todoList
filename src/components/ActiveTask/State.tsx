@@ -1,24 +1,25 @@
 import { ChangeEventHandler, FC, useState } from 'react'
-import { ITask, TPrioty, TStatusIds } from '@/types/Task'
+import { ITask, TPrioty, TStatusIds } from '@/types/Todo'
 import { getTaskField } from '@/store/selectors/todo'
 import { useTypedSelector } from '@/store/hooks'
 import styles from './activeTask.module.scss'
 
 interface Props {
   taskId: ITask['id']
-  setStatus: (prevStatusColumnId: TStatusIds, statusColumnId: TStatusIds) => void
+  setStatus: (prevStatusId: TStatusIds, nextStatusId: TStatusIds) => void
   setPriory: (priory: TPrioty) => void
 }
 
 const Status: FC<Props> = ({ taskId, setStatus, setPriory }) => {
   const priory = useTypedSelector(getTaskField(taskId, 'priory'))
-  const statusColumnId = useTypedSelector(getTaskField(taskId, 'statusColumnId'))
+  const statusId = useTypedSelector(getTaskField(taskId, 'statusId'))
 
+  //? FIXME Какая-то срань, подумать как сделать иначе
   const statuses = useTypedSelector(
     (state) => {
-      return Object.values(state.todo.statusColums.entities).map((statusColumn) => ({
-        title: statusColumn.title,
-        id: statusColumn.id
+      return Object.values(state.todo.status.entities).map((status) => ({
+        title: status.title,
+        id: status.id
       }))
     },
     () => true
@@ -31,7 +32,7 @@ const Status: FC<Props> = ({ taskId, setStatus, setPriory }) => {
 
   const onChangeStatusHandler: ChangeEventHandler<HTMLSelectElement> = (e) => {
     const newStatus = e.target.value as TStatusIds
-    setStatus(statusColumnId, newStatus)
+    setStatus(statusId, newStatus)
   }
 
   const onChangePrioryHandler: ChangeEventHandler<HTMLSelectElement> = (e) => {
@@ -44,7 +45,7 @@ const Status: FC<Props> = ({ taskId, setStatus, setPriory }) => {
     <div className={styles.state}>
       <div className={styles.state__status}>
         <select
-          value={statusColumnId}
+          value={statusId}
           onChange={onChangeStatusHandler}>
           {statuses.map((status) => {
             return (

@@ -1,14 +1,12 @@
 export interface ITask {
   id: string
-  number: number
   title: string
   body: string
   createdAt: number
   completedAt: number | null
   priory: TPrioty
-  files: string[]
-  statusColumnId: TStatusIds
-  subTaskIds: ISubTask['id'][] //! FIXME ПЕРЕИМЕНОВАТЬ В subTaskIds
+  statusId: TStatusIds
+  subTaskIds: ISubTask['id'][]
   commentIds: IComment['id'][]
 }
 

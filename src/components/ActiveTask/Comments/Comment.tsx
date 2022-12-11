@@ -1,7 +1,7 @@
 import Timer from 'react-timestamp'
 import { FC, memo, ReactNode } from 'react'
 import cn from 'classnames'
-import { IComment } from '@/types/Task'
+import { IComment } from '@/types/Todo'
 import CommentForm from './CommentForm'
 import styles from './comments.module.scss'
 

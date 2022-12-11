@@ -1,4 +1,4 @@
-import { ITask } from '@/types/Task'
+import { ITask } from '@/types/Todo'
 import { ActionTypes } from '@/store'
 
 type TasksState = {
@@ -18,21 +18,15 @@ const initialState: TasksState = {
 const tasks = (state = initialState, action: ActionTypes): TasksState => {
   switch (action.type) {
     case 'TODO/ADD_TASK': {
-      const hasTasks = Boolean(Object.keys(state.entities).length)
-      const nextNumber = hasTasks
-        ? Object.values(state.entities).reduce((maxNumber, todo) => Math.max(todo.number, maxNumber), -1) + 1
-        : 1
 
       const newTask: ITask = {
         id: action.taskId,
         createdAt: action.createdAt,
         completedAt: null,
-        number: nextNumber,
         priory: 'ordinary',
         title: '',
         body: '',
-        files: [],
-        statusColumnId: action.statusColumnId,
+        statusId: action.statusId,
         subTaskIds: [],
         commentIds: []
       }
@@ -50,11 +44,6 @@ const tasks = (state = initialState, action: ActionTypes): TasksState => {
     case 'TODO/EDIT_TASK': {
       const task = state.entities[action.taskId]
 
-      if(action.task.files)  {
-        action.task.files = [...task.files ,...action.task.files]
-      }
-
-      // TODO: В будущем попробывать измерить нагрузку редактирования тасок с закоментированным вариантом
       return {
         ...state,
         entities: {
@@ -65,30 +54,21 @@ const tasks = (state = initialState, action: ActionTypes): TasksState => {
           }
         }
       }
-
-      // HINT Может быть так меньше назгруки?
-      // const cloneState = {...state}
-      // cloneState.entities[action.taskId] = {
-      //   ...cloneState.entities[action.taskId],
-      //   ...action.task
-      // }
-
-      // return cloneState
     }
 
     case 'TODO/EDIT_TASK_POSITION': {
-      const { taskId, startColumnId, endColumnId } = action
+      const { taskId, startStatusId, endStatusId } = action
 
-      if (startColumnId === endColumnId) {
+      if (startStatusId === endStatusId) {
         return state
       }
 
       const task = { ...state.entities[taskId] }
 
       //TODO переименовать статусы нормально
-      task.statusColumnId = endColumnId
+      task.statusId = endStatusId
 
-      if (endColumnId === 'done') {
+      if (endStatusId === 'done') {
         task.completedAt = Date.now()
       } else {
         task.completedAt = null

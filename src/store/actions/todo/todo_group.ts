@@ -1,21 +1,21 @@
-import { IComment, ISubTask, ITask, TStatusIds } from "@/types/Task"
+import { IComment, ISubTask, ITask, TStatusIds } from "@/types/Todo"
 
 //? Здесь находятся экшены, которые обновляют сразу несколько одноимённых кейсов в разных редьюсерах для синхронизации данных
 
-export const addTask = (statusColumnId: TStatusIds, taskId: ITask['id'], createdAt: number) => {
+export const addTask = (statusId: TStatusIds, taskId: ITask['id'], createdAt: number) => {
   return {
     type: 'TODO/ADD_TASK',
-    statusColumnId,
+    statusId,
     taskId,
     createdAt
   } as const
 }
 
-export const removeTask = (taskId: ITask['id'], statusColumnId: TStatusIds) => {
+export const removeTask = (taskId: ITask['id'], statusId: TStatusIds) => {
   return {
     type: 'TODO/REMOVE_TASK',
     taskId,
-    statusColumnId
+    statusId
   } as const
 }
 
@@ -37,8 +37,8 @@ export const removeSubTask = (subTaskId: ISubTask['id'], taskId: ITask['id']) =>
 
 type EditTaskPositionParams = {
   taskId: ITask['id']
-  startColumnId: TStatusIds
-  endColumnId: TStatusIds
+  startStatusId: TStatusIds
+  endStatusId: TStatusIds
   endIndex?: number
 }
 

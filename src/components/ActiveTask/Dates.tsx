@@ -1,6 +1,6 @@
 import Timer from 'react-timestamp'
 import { FC } from 'react'
-import { ITask } from '@/types/Task'
+import { ITask } from '@/types/Todo'
 import { getTaskField } from '@/store/selectors/todo'
 import { useTypedSelector } from '@/store/hooks'
 import styles from './activeTask.module.scss'

@@ -1,4 +1,4 @@
-import { IComment, ISubTask, ITask } from '@/types/Task'
+import { IComment, ISubTask, ITask } from '@/types/Todo'
 
 export const setActiveTaskId = (activeTaskId: ITask['id']) => {
   return {
@@ -13,7 +13,7 @@ export const removeActiveTaskId = () => {
   } as const
 }
 
-export const editTask = (taskId: ITask['id'], task: Partial<Pick<ITask, 'body' | 'title' | 'priory' |'files' >>) => {
+export const editTask = (taskId: ITask['id'], task: Partial<Pick<ITask, 'body' | 'title' | 'priory'>>) => {
   return {
     type: 'TODO/EDIT_TASK',
     taskId,

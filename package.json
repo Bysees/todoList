@@ -34,6 +34,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "@types/react-redux": "^7.1.24",
+    "@types/react-beautiful-dnd": "^13.1.2",
     "babel-loader": "^9.1.0",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
@@ -64,15 +65,12 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "@types/react-beautiful-dnd": "^13.1.2",
     "axios": "^1.2.0",
     "classnames": "^2.3.2",
     "handy-svg": "^1.0.8",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
-    "react-contenteditable": "^3.3.6",
     "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "react-timestamp": "^6.0.0",

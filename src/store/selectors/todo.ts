@@ -1,4 +1,4 @@
-import { ITask } from '@/types/Task'
+import { ITask } from '@/types/Todo'
 import { RootState } from '@/store'
 
 export const getActiveTask = (state: RootState) => state.todo.tasks.activeTaskId

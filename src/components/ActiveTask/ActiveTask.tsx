@@ -1,9 +1,17 @@
 import { FC, useEffect, useRef } from 'react'
-import { IComment, TPrioty, TStatusIds, ISubTask } from '@/types/Task'
+import { IComment, TPrioty, TStatusIds, ISubTask } from '@/types/Todo'
 import { useTypedDispatch, useTypedSelector } from '@/store/hooks'
-import { addSubTask, editSubTask, editTask, editTaskPosition, removeActiveTaskId, removeSubTask } from '@/store/actions'
+import {
+  addSubTask,
+  editSubTask,
+  editTask,
+  editTaskPosition,
+  removeActiveTaskId,
+  removeSubTask,
+  removeTask
+} from '@/store/actions'
 import { addComment, addReply } from '@/store/actions'
-import { Title, Body, CommentsSection, Dates, Files, State, SubTasks } from './'
+import { Title, Body, CommentsSection, Dates, State, SubTasks, ManageButtons } from './'
 import styles from './activeTask.module.scss'
 
 const ActiveTask: FC = () => {
@@ -26,12 +34,12 @@ const ActiveTask: FC = () => {
     return null
   }
 
-  const setStatus = (prevStatusColumnId: TStatusIds, nextStatusColumnId: TStatusIds) => {
+  const setStatus = (prevStatusId: TStatusIds, nextStatusId: TStatusIds) => {
     dispatch(
       editTaskPosition({
         taskId,
-        startColumnId: prevStatusColumnId,
-        endColumnId: nextStatusColumnId
+        startStatusId: prevStatusId,
+        endStatusId: nextStatusId
       })
     )
   }
@@ -46,10 +54,6 @@ const ActiveTask: FC = () => {
 
   const setBody = (body: string) => {
     dispatch(editTask(taskId, { body }))
-  }
-
-  const setFiles = (file: string) => {
-    dispatch(editTask(taskId, { files: [file] }))
   }
 
   const addNewSubTask = () => {
@@ -77,6 +81,11 @@ const ActiveTask: FC = () => {
     dispatch(addReply({ replyId, commentId, taskId, createdAt, body }))
   }
 
+  const _removeTask = (statusId: TStatusIds) => {
+    hideTask()
+    dispatch(removeTask(taskId, statusId))
+  }
+
   function hideTask() {
     dispatch(removeActiveTaskId())
   }
@@ -92,11 +101,11 @@ const ActiveTask: FC = () => {
       <section
         className={styles.wrapper}
         key={taskId}>
-        <button
-          className={styles.hideButton}
-          onClick={hideTask}>
-          Esc
-        </button>
+        <ManageButtons
+          hideTask={hideTask}
+          removeTask={_removeTask}
+          taskId={taskId}
+        />
         <Title
           taskId={taskId}
           setTitle={setTitle}
@@ -123,12 +132,6 @@ const ActiveTask: FC = () => {
           addNewReply={addNewReply}
           addNewComment={addNewComment}
           taskId={taskId}
-        />
-
-        {/* // TODO: Сделать files */}
-        <Files
-          taskId={taskId}
-          setFiles={setFiles}
         />
       </section>
     </div>

@@ -1,4 +1,4 @@
-import { IComment } from '@/types/Task'
+import { IComment } from '@/types/Todo'
 import { ActionTypes } from '@/store'
 
 type CommentsState = {
