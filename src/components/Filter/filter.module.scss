@@ -1,0 +1,41 @@
+$lightblue: rgb(41, 169, 255) ;
+
+.filter {
+  display: flex;
+  align-items: center;
+  max-width: 350px;
+  padding: 0.3em 0.6em;
+  margin-bottom: 2em;
+  border-radius: 1.5em;
+  box-shadow: 0 0 5px 4px rgb(0 0 0 / 10%);
+
+  transition: 0.2s;
+
+  & > input {
+    flex-grow: 1;
+    background-color: transparent;
+    padding: 0.2em;
+    font-size: 1.2rem;
+  }
+
+  & > input::placeholder {
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+
+  & > svg {
+    height: 1.8em;
+    width: 1.8em;
+    color: rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+  }
+
+  &_focus {
+    box-shadow: 0 0 3px 1px $lightblue;
+  }
+
+  &_focus > svg {
+    color: $lightblue;
+  }
+}

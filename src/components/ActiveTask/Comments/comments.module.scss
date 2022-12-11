@@ -1,0 +1,110 @@
+.comments {
+  flex-grow: 1;
+
+  & > h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-style: italic;
+    margin-bottom: 1em;
+  }
+}
+
+.list__item > .list {
+  margin-left: 0.5em;
+}
+
+
+.list {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: rgb(178, 178, 178);
+    border-radius: 0.2em;
+  }
+
+  &__item {
+    padding: 0.2em 0 0 1em;
+    margin-top: 1em;
+    width: 600px;
+
+    .comment {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5em 0.5em;
+      border-bottom: 1px solid rgb(196, 196, 196);
+      border-right: 1px solid rgb(196, 196, 196);
+
+      &_active {
+        border-bottom: 1px solid red;
+      }
+
+      & > p {
+        padding-right: 1em;
+        align-self: flex-start;
+        font-size: 1.1rem;
+        word-break: break-all;
+      }
+
+      & > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+
+      }
+
+      & > div time {
+        color: rgba(0, 81, 243, 0.672);
+        font-size: 1rem;
+      }
+
+      & > div button {
+        font-weight: 500;
+        align-self: flex-end;
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__item + &__item {
+    margin-top: 0.5em;
+  }
+}
+
+.commentForm {
+  margin-top: 1em;
+  // width: 100%;
+
+  .input {
+    display: block;
+    font-size: 1.2rem;
+    border-radius: 0.5em;
+    background-color: rgb(233, 233, 233);
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+    width: 100%;
+  }
+
+  .buttons {
+    text-align: right;
+
+    &__cancel {
+      background-color: transparent;
+      font-weight: 700;
+      color: red;
+      margin-right: 2em;
+    }
+
+    &__send {
+      background-color: transparent;
+      font-weight: 700;
+      color: blue;
+    }
+  }
+}

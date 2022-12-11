@@ -1,0 +1,22 @@
+@import url('@/assets/styles/fonts.scss');
+
+.wrapper {
+  //? Container
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1vw;
+
+  font-family: 'Roboto', sans-serif;
+
+  height: 100vh;
+  overflow: hidden;
+}
+
+.wrapper header {
+  height: 60px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
